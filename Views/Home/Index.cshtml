@@ -1,0 +1,89 @@
+﻿@model FIsrtMVCapp.Models.Person
+
+@using FIsrtMVCapp
+@using Microsoft.Extensions.Localization
+@using FIsrtMVCapp.Models;
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewBag.Title = "Zadatak";
+    // Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts
+{
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+}
+
+
+
+@if (TempData["FirstName"] != null) //(Model != null)
+{
+    
+    /*
+        <p>You succesfully added @TempData["FirstName"]</p>
+
+        <p>You succesfully added @ViewBag.AttendantAdded</p>
+        <p>You succesfully added @Model</p>
+    */
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+       You successfully add new attendant: <strong> @TempData["firstName"]</strong>
+       <button type="button" class="btn-close" data-bs-dismiss ="alert" ariaaria-label="Close"></button>
+    </div>
+}
+
+
+
+<!-- ZAMENJENO HTML METODOM
+    <form action="/" method="post" >
+      <label for="NameText">Attendant name:</label>
+      <input id="NameText" name="firstName" type="text"/>
+      <button type="submit">Add</button>
+  </form>
+ -->
+
+<div class="col-md-6">
+
+
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Add attendant:
+            @Localizer["First Name"]
+        </div>
+
+        <div class="card-body">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+            {
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m=>m.FirstName,null,new { @class="form-control",autocomplete="off"})
+                    @Html.LabelFor(m=>m.FirstName)
+                    @Html.ValidationMessageFor(m=>m.FirstName,null,new{@class="text-danger small"}) 
+                </div>
+
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m=>m.LastName,null,new { @class="form-control",autocomplete="off"})
+                    @Html.LabelFor(m=>m.LastName)
+                    @Html.ValidationMessageFor(m=>m.LastName,null,new{@class="text-danger small"})  
+                </div>
+
+                  <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m=>m.DateOfBirth,null,new { @class="form-control",type="date",placeholder="birth",autocomplete="off"})
+                    @Html.LabelFor(m=>m.DateOfBirth)
+                    @Html.ValidationMessageFor(m=>m.DateOfBirth,null,new{@class="text-danger small"}) 
+                </div>
+
+                <input class="btn btn-primary" type="submit" value="Add" />
+
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <partial name="_PersonList" />
+</div>
+

@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+    <header class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Check-In System (Shared Header)</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <ul class="list-inline">
+                    <li class="list-inline-item"> @Html.ActionLink("en","SetCulture","Home",new {culture = "en", sourceUrl = @Context.Request.Path})</li>
+                    <li class="list-inline-item"> @Html.ActionLink("de","SetCulture","Home",new {culture = "de-DE", sourceUrl = @Context.Request.Path})</li>
+                    <li class="list-inline-item"> @Html.ActionLink("sr","SetCulture","Home",new {culture = "sr", sourceUrl = @Context.Request.Path})</li>
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <partial name="_LoginPartial"/>
+            </div>
+        </div>
+
+        <div class="row">
+             <div class="col">
+                 <hr />
+             </div>
+        </div>
+
+    </header>
+   
+  
+
+    <div class="container">
+        <div class="row">
+            
+                  @RenderBody() <!-- ovdje se redneruju (umecu) view-ovi -->
+           
+        </div>
+    </div>
+
+    <footer class="container">
+        <div class = "row text-center">
+            <div class="col">
+                  <p>All right reservd. <a href="http://www.youtube.com/"> YT </a> @DateTime.Now.Year </p>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    @RenderSection("Scripts",required:false)
+</body>
+</html>
